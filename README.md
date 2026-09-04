@@ -2,7 +2,13 @@
 
 Find structural clues behind unexpected blank Excel print pages, without changing the workbook.
 
-The first development stage contains the read-only `.xlsx` inspection engine and its tests. The browser interface and public preview are being connected in the next stage.
+[Open Printscope](https://yougan001.github.io/printscope/) · [中文说明](README.zh-CN.md) · [Testing notes](docs/testing.md)
+
+Choose a workbook, select a worksheet, and review the evidence next to the cell-coordinate map. Export a JSON report to keep the findings. Files are processed in a cancellable browser worker; nothing in the workbook is uploaded or changed.
+
+![Printscope inspecting a real sample workbook](docs/images/workspace.png)
+
+The included sample has report values in `A1:F24` and a value in `M85` hidden by `;;;`. Its print area includes both. Download the sample from the app and inspect M85 in Excel to check the diagnosis yourself.
 
 ## What it checks
 
@@ -22,6 +28,7 @@ Node.js 22.13 or newer:
 ```sh
 npm ci
 npm test
+npm run dev
 ```
 
 ```js
@@ -44,4 +51,16 @@ Conditional formatting, theme colors, merged visual extents, legacy drawings, pr
 
 Microsoft documents several causes of blank printed pages, including hidden-looking values, blank error printing and distant objects: [Blank pages unexpectedly printed in Excel](https://learn.microsoft.com/en-us/troubleshoot/microsoft-365-apps/excel/blank-pages-unexpectedly-printed). The workbook reader follows the [SpreadsheetML worksheet structure](https://learn.microsoft.com/en-us/office/open-xml/spreadsheet/working-with-sheets) and [PageSetup attributes](https://learn.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.pagesetup?view=openxml-3.0.1).
 
-MIT licensed. Dependency licenses remain with their packages.
+## Development and contributions
+
+React, TypeScript, Vinext and Vite, with a framework-independent inspection core. `fflate` handles decompression and `fast-xml-parser` validates/parses XML. GitHub Actions tests, checks types and builds the static app before publishing to Pages. No application server or API key is needed.
+
+```sh
+npm run lint
+npm run typecheck
+npm run build
+```
+
+Reproducible edge cases are welcome. Do not attach a private workbook to a public issue: make a minimal copy with invented values, or describe the relevant XML settings and your Excel version. Useful issues include the expected result, actual finding and a tiny sample that preserves the problem.
+
+MIT licensed. See [third-party notices](THIRD_PARTY_NOTICES.md) for reused components and icons.

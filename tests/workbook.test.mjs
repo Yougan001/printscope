@@ -1,4 +1,5 @@
 import test from 'node:test';
+import { spawnSync } from 'node:child_process';
 import assert from 'node:assert/strict';
 import { inspectWorkbook } from '../core/workbook.mjs';
 import { parseXml, attr, child, textOf } from '../core/xml.mjs';
@@ -18,6 +19,19 @@ const inspect = (body) =>
     zipParts({ ...sampleParts(), 'xl/worksheets/sheet1.xml': worksheet(body) }),
   ).sheets[0];
 const ids = (sheet) => sheet.findings.map((finding) => finding.id);
+
+test('core imports and inspects without Node Buffer globals', () => {
+  const script = `globalThis.Buffer = undefined;
+    const {inspectWorkbook}=await import('./core/workbook.mjs');
+    const {createSample}=await import('./core/sample.mjs');
+    if(inspectWorkbook(createSample()).storedCellCount!==13) throw Error('Wrong result');`;
+  const result = spawnSync(
+    process.execPath,
+    ['--input-type=module', '-e', script],
+    { cwd: new URL('..', import.meta.url), encoding: 'utf8', timeout: 10000 },
+  );
+  assert.equal(result.status, 0, result.stderr);
+});
 
 test('real sample detects the concealed M85 value without confusing populated and candidate bounds', () => {
   const report = inspectWorkbook(createSample()),

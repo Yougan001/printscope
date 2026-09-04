@@ -30,6 +30,8 @@ export function parseXml(source, budget = { nodes: 0 }) {
     throw new Error(
       'DOCTYPE declarations and custom entities are not supported.',
     );
+  // The standalone validator currently imports Node-only Buffer code in browsers.
+  // eslint-disable-next-line typescript/no-deprecated
   const valid = XMLValidator.validate(source);
   if (valid !== true) throw new Error(`Invalid workbook XML: ${valid.err.msg}`);
   const parser = new XMLParser({

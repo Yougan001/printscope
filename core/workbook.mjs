@@ -52,7 +52,8 @@ function targetPart(source, target) {
   }
   if (
     !decoded ||
-    /[\\:#?\u0000-\u001f]/.test(decoded) ||
+    /[\\:#?]/.test(decoded) ||
+    decoded.split('').some((character) => character.charCodeAt(0) < 32) ||
     decoded.startsWith('//')
   )
     throw new Error('Unsafe internal workbook relationship.');
