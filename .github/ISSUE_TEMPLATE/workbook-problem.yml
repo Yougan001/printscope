@@ -1,0 +1,35 @@
+name: Workbook finding or import problem
+description: Report a reproducible diagnostic or file-reading issue
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: Do not attach a private workbook. Create a fresh example with invented values; deleting visible cells alone may leave private metadata. English and Chinese are welcome.
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal workbook settings or steps
+      description: Describe the cells, number formats, print area or other settings needed. Attach only a sample you have reviewed for private data.
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: Expected and actual finding
+      description: Include the finding text and affected sheet/cell addresses, or the import error. Printscope does not predict an exact page count.
+    validations:
+      required: true
+  - type: textarea
+    id: spreadsheet
+    attributes:
+      label: What did Excel or LibreOffice show?
+      description: Include the application version and the relevant setting or Page Break Preview observation. Say if you have not checked it there.
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Printscope version and environment
+      placeholder: "Release/commit, OS and browser version"
+    validations:
+      required: true

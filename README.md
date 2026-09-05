@@ -2,7 +2,7 @@
 
 Find structural clues behind unexpected blank Excel print pages, without changing the workbook.
 
-[Open Printscope](https://yougan001.github.io/printscope/) · [中文说明](README.zh-CN.md) · [Testing notes](docs/testing.md)
+[Open Printscope](https://yougan001.github.io/printscope/) · [中文说明](README.zh-CN.md) · [Testing notes](docs/testing.md) · [Releases](https://github.com/Yougan001/printscope/releases)
 
 Choose a workbook, select a worksheet, and review the evidence next to the cell-coordinate map. Export a JSON report to keep the findings. Files are processed in a cancellable browser worker; nothing in the workbook is uploaded or changed.
 
@@ -61,6 +61,8 @@ npm run typecheck
 npm run build
 ```
 
-Reproducible edge cases are welcome. Do not attach a private workbook to a public issue: make a minimal copy with invented values, or describe the relevant XML settings and your Excel version. Useful issues include the expected result, actual finding and a tiny sample that preserves the problem.
+Reproducible edge cases are welcome. Do not attach a private workbook to a public issue: create a fresh, minimal workbook with invented values, or describe the relevant XML settings and your Excel version. Useful issues include the expected result, actual finding and a tiny sample that preserves the problem.
+
+Use the [workbook issue form](https://github.com/Yougan001/printscope/issues/new?template=workbook-problem.yml) and read the [contribution guide](CONTRIBUTING.md) for safe samples and regression checks.
 
 MIT licensed. See [third-party notices](THIRD_PARTY_NOTICES.md) for reused components and icons.
