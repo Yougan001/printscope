@@ -20,6 +20,10 @@ A separate process removes the Node `Buffer` global before importing the core an
 
 `node scripts/qa-fixtures.mjs` creates synthetic, non-sensitive workbooks in ignored `work/fixtures`. These do not replace testing on more real-world Excel/LibreOffice files. No native Excel pagination or printer-driver verification is claimed.
 
+## Public deployment
+
+The Linux test and Pages workflows both succeeded for the browser-interface stage. The public Pages app was opened and inspected: the sample produced two findings, its canonical URL was correct, and selecting the real two-sheet fixture produced 14 stored cells. The sample was restored after testing.
+
 ## Security and interpretation
 
 This is not a comprehensive ZIP security audit or a full OOXML schema validator. Only requested XML parts are read, no archive paths are extracted, and relationships never trigger a network fetch. Imported text is rendered as text, not HTML. ZIP/XML and worker time limits bound the work; malformed or unsupported files can be rejected conservatively.
